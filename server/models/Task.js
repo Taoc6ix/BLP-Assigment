@@ -6,7 +6,7 @@ const TaskSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        enums: ['default' , 'personal' , 'shopping' , 'wishlist' , 'work'],
+        enums: ['default' , 'personal' , 'shopping' , 'wishlist' , 'work' , 'gym'],
         default: 'default'
     },
     status: {
