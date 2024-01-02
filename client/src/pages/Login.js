@@ -52,6 +52,9 @@ const Login = () => {
     dispatch(setLogin(res.data.user))
     navigate('/home')
    })
+   .catch((error) => {
+    console.error('Login Error:', error);
+  });
   }
 
   const handleRegister = (values , onSubmitProps) => {
@@ -63,6 +66,9 @@ const Login = () => {
         onSubmitProps.resetForm()
         setPage('login')
     })
+    .catch((error) => {
+      console.error('Register Error:', error);
+    });
   }
 
   const handleForm = (values, onSubmitProps) => {
