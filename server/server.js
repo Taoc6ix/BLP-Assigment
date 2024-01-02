@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 app.use(express.json())
-app.use(cors({origin:'http://localhost:3000', credentials: true}))
+app.use(cors({origin:'http://localhost:5000', credentials: true}))
 app.use(cookieParser())
 
 app.use('/assets', express.static(path.join(__dirname , 'public/assets')))
@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage})
-
+const uri = 'mongodb+srv://db_user:8xtUKklOnRaSDxi7@cluster0.c1ou4tt.mongodb.net/?retryWrites=true&w=majority';
 
 app.use('/auth/register', upload.single('picture'), Register)
 app.use('/auth', UserRoutes)
@@ -51,10 +51,8 @@ app.use((err,req,res,next) => {
 })
 
 const PORT = process.env.PORT || 5000
-mongoose.connect(process.env.MONGO_DB).then(() => {
+mongoose.connect(uri, process.env.MONGO_DB).then(() => {
     app.listen(PORT , () => {
-        //One time insertion to Db
-      //  Task.insertMany(tasks)
         console.log(`app is listening to PORT ${PORT}`)
     })
 }).catch((err) => {
